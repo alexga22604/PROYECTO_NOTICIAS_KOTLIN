@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Noticias-practica3</string>
+    <string name="title_activity_nav">NavActivity</string>
 </resources>
