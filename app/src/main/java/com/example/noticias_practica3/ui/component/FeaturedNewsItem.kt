@@ -27,7 +27,6 @@ fun FeaturedNewsItem(news: NewsBo, onClick: (NewsBo) -> Unit) {
             .clickable { (onClick(news)) }
             .padding(bottom = 16.dp)
     ) {
-
         Image(
             painter = painterResource(id = news.imageRes),
             contentDescription = null,
@@ -46,9 +45,9 @@ fun FeaturedNewsItem(news: NewsBo, onClick: (NewsBo) -> Unit) {
                 color = MaterialTheme.colorScheme.onSurface
             )
             Text(
-                    text = news.author.fullName,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                text = news.author.fullName,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
             Text(

@@ -2,7 +2,6 @@ package com.example.noticias_practica3.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -15,12 +14,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import com.example.noticias_practica3.R
 import com.example.noticias_practica3.data.repository.NewsRepository
 import com.example.noticias_practica3.ui.component.NewsTopBar
 import com.example.noticias_practica3.ui.theme.screen.NewsListScreen
 
 @Composable
 fun NewsApp() {
+    val context = LocalContext.current
     val newslist = NewsRepository.getNews()
     var isSearchActive by remember { mutableStateOf(false) }
     var searchText by remember { mutableStateOf("") }
@@ -28,11 +31,12 @@ fun NewsApp() {
         val query = searchText.lowercase()
         news.title.lowercase().contains(query) ||
                 news.description.lowercase().contains(query) ||
+                news.author.name.lowercase().contains(query) ||
                 news.author.fullName.lowercase().contains(query)
     }
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        {
+        topBar = {
             NewsTopBar(
                 isSearchActive = isSearchActive,
                 searchText = searchText,
@@ -47,22 +51,22 @@ fun NewsApp() {
         if (filteredNews.isEmpty()) {
             Box(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxSize()
                     .padding(paddingValues),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "No hay coincidencias",
+                    text = stringResource(id = R.string.search_no_results),
                     style = MaterialTheme.typography.bodyLarge,
                     color = Color.Gray
                 )
             }
-        }else
-        {
+        } else {
             NewsListScreen(
                 newList = filteredNews,
                 onNewsClick = { news ->
-                    println("Ha pulsado en: --")
+                    val mensaje = context.getString(R.string.log_news_click, news.title)
+                    println(mensaje)
                 },
                 modifier = Modifier.padding(paddingValues)
             )

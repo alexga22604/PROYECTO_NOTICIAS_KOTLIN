@@ -1,7 +1,9 @@
 package com.example.noticias_practica3.data.mapper
 
 import com.example.noticias_practica3.data.NewsDto
-import com.example.noticias_practica3.data.model.*
+import com.example.noticias_practica3.data.model.AuthorBo
+import com.example.noticias_practica3.data.model.BlogBo
+import com.example.noticias_practica3.data.model.NewsBo
 
 fun NewsDto.toBo(): NewsBo {
     return NewsBo(

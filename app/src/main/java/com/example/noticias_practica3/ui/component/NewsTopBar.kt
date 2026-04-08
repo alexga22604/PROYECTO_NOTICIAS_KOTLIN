@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Terminal
@@ -23,7 +22,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -48,15 +46,14 @@ fun NewsTopBar(
                         color = Color.Transparent, shape = RoundedCornerShape(4.dp)
                     ),
                 contentAlignment = Alignment.Center
-                )
+            )
             {
                 Icon(
                     imageVector = Icons.Default.Terminal,
                     tint = Color.Red,
-                    contentDescription = "Terminal Logo",
+                    contentDescription = stringResource(id = R.string.cd_terminal_logo),
                     modifier = Modifier.size(20.dp),
                 )
-
             }
         },
         title = {
@@ -64,7 +61,7 @@ fun NewsTopBar(
                 TextField(
                     value = searchText,
                     onValueChange = onSearchTextChange,
-                    placeholder = { Text("Search news...") },
+                    placeholder = { Text(text = stringResource(id = R.string.search_placeholder)) },
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true,
                     colors = TextFieldDefaults.colors(
@@ -91,7 +88,10 @@ fun NewsTopBar(
             ) {
                 Icon(
                     imageVector = if (isSearchActive) Icons.Default.Close else Icons.Default.Search,
-                    contentDescription = "Search"
+                    contentDescription = if (isSearchActive)
+                        stringResource(id = R.string.cd_close_search)
+                    else
+                        stringResource(id = R.string.cd_open_search)
                 )
             }
         }

@@ -1,6 +1,6 @@
 package com.example.noticias_practica3.data.model
 
-data class NewsBo (
+data class NewsBo(
     val id: String,
     val title: String,
     val description: String,

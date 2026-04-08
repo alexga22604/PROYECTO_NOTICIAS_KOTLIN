@@ -12,7 +12,6 @@ class NavActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-
             Noticiaspractica3Theme {
                 NewsApp()
             }

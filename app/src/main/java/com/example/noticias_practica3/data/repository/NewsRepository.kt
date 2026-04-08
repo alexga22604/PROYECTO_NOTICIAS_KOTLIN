@@ -1,9 +1,9 @@
 package com.example.noticias_practica3.data.repository
 
 import com.example.noticias_practica3.R
+import com.example.noticias_practica3.data.NewsDto
 import com.example.noticias_practica3.data.mapper.toBo
 import com.example.noticias_practica3.data.model.NewsBo
-import com.example.noticias_practica3.data.NewsDto
 
 object NewsRepository {
     private fun getNewsFromDataSource(): List<NewsDto> {

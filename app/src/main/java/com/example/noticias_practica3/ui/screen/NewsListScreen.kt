@@ -11,12 +11,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.noticias_practica3.R
 import com.example.noticias_practica3.data.model.NewsBo
 import com.example.noticias_practica3.ui.theme.component.FeaturedNewsItem
 import com.example.noticias_practica3.ui.theme.component.StandardNewsItem
-import com.example.noticias_practica3.R
+
 @Composable
-fun NewsListScreen(newList: List<NewsBo>, onNewsClick: (NewsBo) -> Unit, modifier: Modifier = Modifier) {
+fun NewsListScreen(
+    newList: List<NewsBo>,
+    onNewsClick: (NewsBo) -> Unit,
+) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         item {
             Text(
