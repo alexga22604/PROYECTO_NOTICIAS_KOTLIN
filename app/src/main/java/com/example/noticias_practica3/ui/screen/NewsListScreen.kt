@@ -20,6 +20,7 @@ import com.example.noticias_practica3.ui.theme.component.StandardNewsItem
 fun NewsListScreen(
     newList: List<NewsBo>,
     onNewsClick: (NewsBo) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         item {
