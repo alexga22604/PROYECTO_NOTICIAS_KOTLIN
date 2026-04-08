@@ -1,61 +1,61 @@
 package com.example.noticias_practica3.data.repository
 
-import com.example.noticias_practica3.data.AuthorBo
-import com.example.noticias_practica3.data.BlogBo
-import com.example.noticias_practica3.data.InterestBo
-import com.example.noticias_practica3.data.NewsBo
+import com.example.noticias_practica3.R
+import com.example.noticias_practica3.data.mapper.toBo
+import com.example.noticias_practica3.data.model.NewsBo
+import com.example.noticias_practica3.data.NewsDto
 
 object NewsRepository {
-    fun getNews(): List<NewsBo> {
-        val author = AuthorBo("1", "Aris", "Guimera", 0)
-        val blog = BlogBo("1", "Android Blog", "https://android.com")
-        val interests = listOf(InterestBo("1", "Kotlin"), InterestBo("2", "Compose"))
-
+    private fun getNewsFromDataSource(): List<NewsDto> {
         return listOf(
-            NewsBo(
+            NewsDto(
                 "1",
                 "Novedades de Android 16",
                 "Descubre lo nuevo...",
-                "Cuerpo largo...",
+                "Cuerpo...",
                 "12 Oct",
-                author,
-                blog,
-                0,
-                interests
+                "Aris",
+                "Guimera",
+                R.drawable.img_news5,
+                R.drawable.img_news1
             ),
-            NewsBo(
+            NewsDto(
                 "2",
                 "Compose Multiplatform",
                 "Ya es estable...",
-                "Cuerpo largo...",
+                "Cuerpo...",
                 "11 Oct",
-                author,
-                blog,
-                0,
-                interests
+                "Aris",
+                "Guimera",
+                R.drawable.img_news5,
+                R.drawable.img_news2
             ),
-            NewsBo(
+            NewsDto(
                 "3",
                 "Kotlin 2.1",
                 "Mejoras de rendimiento...",
-                "Cuerpo largo...",
+                "Cuerpo...",
                 "10 Oct",
-                author,
-                blog,
-                0,
-                interests
+                "Aris",
+                "Guimera",
+                R.drawable.img_news5,
+                R.drawable.img_news3
             ),
-            NewsBo(
+            NewsDto(
                 "4",
                 "Material Design 4?",
-                "Rumores sobre el futuro...",
-                "Cuerpo largo...",
+                "Rumores...",
+                "Cuerpo...",
                 "09 Oct",
-                author,
-                blog,
-                0,
-                interests
+                "Aris",
+                "Guimera",
+                R.drawable.img_news5,
+                R.drawable.img_news4
             )
         )
+    }
+
+    fun getNews(): List<NewsBo> {
+        return getNewsFromDataSource().map { it.toBo() }
     }
 }

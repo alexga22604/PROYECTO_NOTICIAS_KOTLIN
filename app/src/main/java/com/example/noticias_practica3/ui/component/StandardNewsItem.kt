@@ -20,7 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.example.noticias_practica3.data.NewsBo
+import com.example.noticias_practica3.data.model.NewsBo
 
 @Composable
 fun StandardNewsItem(news: NewsBo, onClick: (NewsBo) -> Unit) {

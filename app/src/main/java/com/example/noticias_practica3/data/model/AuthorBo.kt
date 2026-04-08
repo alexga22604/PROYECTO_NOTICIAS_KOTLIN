@@ -1,4 +1,4 @@
-package com.example.noticias_practica3.data
+package com.example.noticias_practica3.data.model
 
 data class AuthorBo(
     val id: String,

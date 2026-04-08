@@ -8,18 +8,19 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.noticias_practica3.data.NewsBo
+import com.example.noticias_practica3.data.model.NewsBo
 import com.example.noticias_practica3.ui.theme.component.FeaturedNewsItem
 import com.example.noticias_practica3.ui.theme.component.StandardNewsItem
-
+import com.example.noticias_practica3.R
 @Composable
-fun NewsListScreen(newList: List<NewsBo>, onNewsClick: (NewsBo) -> Unit) {
+fun NewsListScreen(newList: List<NewsBo>, onNewsClick: (NewsBo) -> Unit, modifier: Modifier = Modifier) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         item {
             Text(
-                text = "Top stories for you",
+                text = stringResource(id = R.string.top_tittle_main),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(16.dp)

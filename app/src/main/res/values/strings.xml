@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Noticias-practica3</string>
     <string name="title_activity_nav">NavActivity</string>
+    <string name="top_tittle_main">Top stories for you</string>
+    <string name="jetnews">jetnews</string>
 </resources>

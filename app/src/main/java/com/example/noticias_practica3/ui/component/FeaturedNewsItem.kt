@@ -17,7 +17,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.noticias_practica3.data.NewsBo
+import com.example.noticias_practica3.data.model.NewsBo
 
 @Composable
 fun FeaturedNewsItem(news: NewsBo, onClick: (NewsBo) -> Unit) {
@@ -27,6 +27,7 @@ fun FeaturedNewsItem(news: NewsBo, onClick: (NewsBo) -> Unit) {
             .clickable { (onClick(news)) }
             .padding(bottom = 16.dp)
     ) {
+
         Image(
             painter = painterResource(id = news.imageRes),
             contentDescription = null,
@@ -45,9 +46,9 @@ fun FeaturedNewsItem(news: NewsBo, onClick: (NewsBo) -> Unit) {
                 color = MaterialTheme.colorScheme.onSurface
             )
             Text(
-                text = news.author.fullName,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                    text = news.author.fullName,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
             Text(
