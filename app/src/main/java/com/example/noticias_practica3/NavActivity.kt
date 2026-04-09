@@ -10,6 +10,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
+import androidx.compose.ui.res.stringResource
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.rememberNavBackStack
 import com.example.noticias_practica3.ui.NewsApp
@@ -32,7 +33,7 @@ class NavActivity : ComponentActivity() {
                         slideInHorizontally { it } + fadeIn() togetherWith
                                 slideOutHorizontally { -it } + fadeOut()
                     },
-                    label = "screen_transition"
+                    label = stringResource(R.string.screen_transition)
                 ) { targetScreen ->
                     when (targetScreen) {
                         is ScreenNav.Home -> {

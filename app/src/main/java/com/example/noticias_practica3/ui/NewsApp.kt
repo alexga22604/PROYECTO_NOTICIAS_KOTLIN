@@ -18,7 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.navigation3.runtime.NavBackStack
-import androidx.navigation3.runtime.rememberNavBackStack
 import com.example.noticias_practica3.R
 import com.example.noticias_practica3.data.repository.NewsRepository
 import com.example.noticias_practica3.ui.component.NewsTopBar
@@ -71,7 +70,8 @@ fun NewsApp(backStack: NavBackStack<ScreenNav>) {
                 onNewsClick = { news ->
                     val res = context.resources
                     val message = res.getString(R.string.log_news_click, news.title.toString())
-                    Log.d("Navigation", message)
+                    val tag = res.getString(R.string.navigation)
+                    Log.d(tag, message)
 
                     backStack.add(ScreenNav.NewsDetail(newsId = news.id))
                 },

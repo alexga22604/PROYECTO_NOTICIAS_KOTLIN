@@ -11,5 +11,11 @@
     <string name="cd_close_search">Close search</string>
     <string name="cd_open_search">Search Open</string>
     <string name="cd_terminal_logo">Terminal icon logo</string>
-
+    <string name="published_in">Published in:</string>
+    <string name="android_developers">Android Developers</string>
+    <string name="back_button_content_description">Back</string>
+    <string name="news_reading_time">%1$s · 4 min read</string>
+    <string name="related_interests">Related interests</string>
+    <string name="navigation">Navigation</string>
+    <string name="screen_transition">screen_transition</string>
 </resources>

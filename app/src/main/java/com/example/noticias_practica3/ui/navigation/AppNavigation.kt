@@ -7,8 +7,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
-import com.example.noticias_practica3.ui.screen.NewsHomeScreen
 import com.example.noticias_practica3.ui.screen.NewsDetailScreen
+import com.example.noticias_practica3.ui.screen.NewsHomeScreen
 
 @Composable
 fun AppNavigation(
@@ -22,8 +22,6 @@ fun AppNavigation(
         onBack = { backStack.removeLastOrNull() },
         modifier = Modifier.padding(paddingValues),
         entryProvider = entryProvider {
-
-
             entry<ScreenNav.Home> {
                 NewsHomeScreen(
                     searchText = searchText,
