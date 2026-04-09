@@ -20,6 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.example.noticias_practica3.data.model.NewsBo
 
 @Composable
@@ -32,14 +33,13 @@ fun StandardNewsItem(news: NewsBo, onClick: (NewsBo) -> Unit) {
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
-                painter = painterResource(id = news.imageRes),
+            AsyncImage(
+                model = news.imageRes,
                 contentDescription = null,
-                modifier = Modifier
-                    .size(24.dp)
-                    .clip(RoundedCornerShape(4.dp)),
+                modifier = Modifier.size(80.dp),
                 contentScale = ContentScale.Crop
             )
+
             Column(modifier = Modifier.padding(horizontal = 16.dp)) {
                 Text(
                     text = news.title,

@@ -1,5 +1,6 @@
 package com.example.noticias_practica3.ui
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -16,13 +17,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.rememberNavBackStack
 import com.example.noticias_practica3.R
 import com.example.noticias_practica3.data.repository.NewsRepository
 import com.example.noticias_practica3.ui.component.NewsTopBar
+import com.example.noticias_practica3.ui.navigation.ScreenNav
 import com.example.noticias_practica3.ui.theme.screen.NewsListScreen
 
 @Composable
-fun NewsApp() {
+fun NewsApp(backStack: NavBackStack<ScreenNav>) {
     val context = LocalContext.current
     val newslist = NewsRepository.getNews()
     var isSearchActive by remember { mutableStateOf(false) }
@@ -65,8 +69,11 @@ fun NewsApp() {
             NewsListScreen(
                 newList = filteredNews,
                 onNewsClick = { news ->
-                    val mensaje = context.getString(R.string.log_news_click, news.title)
-                    println(mensaje)
+                    val res = context.resources
+                    val message = res.getString(R.string.log_news_click, news.title.toString())
+                    Log.d("Navigation", message)
+
+                    backStack.add(ScreenNav.NewsDetail(newsId = news.id))
                 },
                 modifier = Modifier.padding(paddingValues)
             )

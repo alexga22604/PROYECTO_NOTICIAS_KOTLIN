@@ -4,7 +4,7 @@ data class AuthorBo(
     val id: String,
     val name: String,
     val surname: String,
-    val avatarRes: Int
+    val avatarRes: String
 ) {
     val fullName: String get() = "$name $surname"
 }

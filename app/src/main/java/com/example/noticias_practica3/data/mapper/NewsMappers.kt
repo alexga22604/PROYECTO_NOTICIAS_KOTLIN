@@ -12,12 +12,12 @@ fun NewsDto.toBo(): NewsBo {
         description = this.subtitle ?: "",
         content = this.body ?: "",
         date = this.date ?: "",
-        imageRes = this.imageRes ?: 0,
+        imageRes = this.imageRes ?: "",
         author = AuthorBo(
             id = "auth-${this.id}",
             name = this.authorFirstName ?: "",
             surname = this.authorLastName ?: "",
-            avatarRes = this.authorImage ?: 0
+            avatarRes = this.authorImage ?: ""
         ),
         blog = BlogBo("1", "JetNews Blog", ""),
         interests = emptyList()

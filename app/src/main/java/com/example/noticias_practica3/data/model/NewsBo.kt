@@ -8,6 +8,6 @@ data class NewsBo(
     val date: String,
     val author: AuthorBo,
     val blog: BlogBo,
-    val imageRes: Int,
+    val imageRes: String,
     val interests: List<InterestBo>
 )
