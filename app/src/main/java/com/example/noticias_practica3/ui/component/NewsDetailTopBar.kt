@@ -41,18 +41,18 @@ fun NewsDetailTopBar(
                 modifier = Modifier.padding(start = 12.dp)
             ) {
                 Surface(
-                    modifier = Modifier.size(32.dp),
+                    modifier = Modifier.size(40.dp),
                     shape = CircleShape,
                     color = MaterialTheme.colorScheme.primaryContainer
                 ) {
                     Icon(
                         imageVector = Icons.Default.Android,
                         contentDescription = null,
-                        modifier = Modifier.padding(4.dp)
+                        modifier = Modifier.size(24.dp).padding(4.dp)
                     )
                 }
 
-                Spacer(modifier = Modifier.width(20.dp))
+                Spacer(modifier = Modifier.width(15.dp))
 
                 Column {
                     Text(
@@ -72,7 +72,8 @@ fun NewsDetailTopBar(
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = stringResource(R.string.back_button_content_description),
-                    tint = Color.Red
+                    tint = Color.Red,
+
                 )
             }
         },
