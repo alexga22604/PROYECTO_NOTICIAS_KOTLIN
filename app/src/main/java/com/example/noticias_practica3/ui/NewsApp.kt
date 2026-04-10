@@ -68,10 +68,6 @@ fun NewsApp(backStack: NavBackStack<ScreenNav>) {
             NewsListScreen(
                 newList = filteredNews,
                 onNewsClick = { news ->
-                    val res = context.resources
-                    val message = res.getString(R.string.log_news_click, news.title.toString())
-                    val tag = res.getString(R.string.navigation)
-                    Log.d(tag, message)
 
                     backStack.add(ScreenNav.NewsDetail(newsId = news.id))
                 },
