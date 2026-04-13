@@ -25,7 +25,7 @@ import com.example.noticias_practica3.ui.theme.screen.NewsListScreen
 @Composable
 fun NewsApp(
     backStack: NavBackStack<ScreenNav>,
-    viewModel: NewsViewModel = viewModel()
+    viewModel: NewsViewModel = viewModel(factory = NewsViewModel.Factory)
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current

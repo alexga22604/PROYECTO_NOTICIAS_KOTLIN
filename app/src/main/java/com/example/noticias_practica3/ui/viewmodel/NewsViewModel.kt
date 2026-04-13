@@ -3,6 +3,10 @@ package com.example.noticias_practica3.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.noticias_practica3.data.model.NewsBo
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.CreationExtras
+import com.example.noticias_practica3.data.repository.InterestsRepository
 import com.example.noticias_practica3.data.repository.NewsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,6 +17,10 @@ import kotlinx.coroutines.launch
 class NewsViewModel : ViewModel() {
     private val newsRepository = NewsRepository
     private var allNews: List<NewsBo> = emptyList()
+class NewsViewModel(
+    private val newsRepository: NewsRepository,
+    private val interestsRepository: InterestsRepository
+) : ViewModel() {
     private val _uiState = MutableStateFlow(NewUiState())
     val uiState: StateFlow<NewUiState> = _uiState.asStateFlow()
 
@@ -38,7 +46,7 @@ class NewsViewModel : ViewModel() {
             val isNowActive = !it.isSearchActive
             it.copy(
                 isSearchActive = isNowActive,
-                searchText = if (!isNowActive) DEFAULT_STRING_VALUE else it.searchText
+                searchText = if (!isNowActive) "" else it.searchText
             )
         }
         applyFilter()
@@ -46,16 +54,36 @@ class NewsViewModel : ViewModel() {
 
     private fun applyFilter() {
         val query = _uiState.value.searchText.lowercase()
-
-        if (query.isEmpty()) {
-            _uiState.update { it.copy(newsList = allNews) }
-        } else {
-            val filtered = allNews.filter { news ->
-                news.title.lowercase().contains(query) ||
-                        news.description.lowercase().contains(query) ||
-                        news.author.name.lowercase().contains(query)
+        val selectedInterests = _uiState.value.selectedInterests
+        val filtered = allNews.filter { news ->
+            val matchesQuery = query.isEmpty() ||
+                    news.title.lowercase().contains(query) ||
+                    news.description.lowercase().contains(query) ||
+                    news.author.name.lowercase().contains(query)
+            val matchesInterests = if (selectedInterests.isEmpty()) {
+                true
+            } else {
+                news.interests.any { it.name in selectedInterests } ||
+                        selectedInterests.any { interest -> news.title.contains(interest, ignoreCase = true) }
             }
-            _uiState.update { it.copy(newsList = filtered) }
+
+            matchesQuery && matchesInterests
+        }
+        _uiState.update { it.copy(newsList = filtered) }
+    }
+
+    companion object {
+        val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
+                val application =
+                    checkNotNull(extras[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY])
+
+                return NewsViewModel(
+                    newsRepository = NewsRepository,
+                    interestsRepository = InterestsRepository(application.applicationContext)
+                ) as T
+            }
         }
     }
 }
