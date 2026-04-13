@@ -48,7 +48,9 @@ fun NewsDetailTopBar(
                     Icon(
                         imageVector = Icons.Default.Android,
                         contentDescription = null,
-                        modifier = Modifier.size(24.dp).padding(4.dp)
+                        modifier = Modifier
+                            .size(24.dp)
+                            .padding(4.dp)
                     )
                 }
 
@@ -73,8 +75,7 @@ fun NewsDetailTopBar(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = stringResource(R.string.back_button_content_description),
                     tint = Color.Red,
-
-                )
+                    )
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(

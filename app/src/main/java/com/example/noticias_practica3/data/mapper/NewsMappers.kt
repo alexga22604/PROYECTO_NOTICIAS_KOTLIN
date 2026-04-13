@@ -3,12 +3,10 @@ package com.example.noticias_practica3.data.mapper
 import com.example.noticias_practica3.data.NewsDto
 import com.example.noticias_practica3.data.model.AuthorBo
 import com.example.noticias_practica3.data.model.BlogBo
-import com.example.noticias_practica3.data.model.InterestBo
 import com.example.noticias_practica3.data.model.NewsBo
 
 const val DEFAULT_STRING_VALUE = ""
 const val DEFAULT_INT_VALUE = 0
-
 fun NewsDto.toAuthorBo(): AuthorBo {
     return AuthorBo(
         id = "auth-${this.id ?: DEFAULT_STRING_VALUE}",
@@ -34,10 +32,8 @@ fun NewsDto.toBo(): NewsBo {
         content = this.body ?: DEFAULT_STRING_VALUE,
         date = this.date ?: DEFAULT_STRING_VALUE,
         imageRes = (this.imageRes ?: DEFAULT_INT_VALUE).toString(),
-
         author = this.toAuthorBo(),
         blog = this.toBlogBo(),
-
         interests = emptyList()
     )
 }
