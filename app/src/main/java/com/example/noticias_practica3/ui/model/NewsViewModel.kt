@@ -7,9 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
-
 class NewsViewModel : ViewModel() {
-
     private val newsRepository = NewsRepository
     private val _uiState = MutableStateFlow(NewUiState())
     val uiState: StateFlow<NewUiState> = _uiState.asStateFlow()
