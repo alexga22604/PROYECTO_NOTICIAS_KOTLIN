@@ -16,6 +16,8 @@ import com.example.noticias_practica3.data.model.NewsBo
 import com.example.noticias_practica3.ui.theme.component.FeaturedNewsItem
 import com.example.noticias_practica3.ui.theme.component.StandardNewsItem
 
+const val DEFAULT_INT_VALUE = 0
+
 @Composable
 fun NewsListScreen(
     newList: List<NewsBo>,
@@ -33,7 +35,7 @@ fun NewsListScreen(
         }
 
         itemsIndexed(newList) { index, news ->
-            if (index == 0) {
+            if (index == DEFAULT_INT_VALUE) {
                 FeaturedNewsItem(news, onNewsClick)
             } else {
                 StandardNewsItem(news, onNewsClick)

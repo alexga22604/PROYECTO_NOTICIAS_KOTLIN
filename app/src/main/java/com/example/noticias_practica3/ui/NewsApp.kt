@@ -1,6 +1,5 @@
 package com.example.noticias_practica3.ui
 
-import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -8,50 +7,41 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.NavBackStack
 import com.example.noticias_practica3.R
-import com.example.noticias_practica3.data.repository.NewsRepository
 import com.example.noticias_practica3.ui.component.NewsTopBar
+import com.example.noticias_practica3.ui.model.NewsViewModel
 import com.example.noticias_practica3.ui.navigation.ScreenNav
 import com.example.noticias_practica3.ui.theme.screen.NewsListScreen
 
 @Composable
-fun NewsApp(backStack: NavBackStack<ScreenNav>) {
+fun NewsApp(
+    backStack: NavBackStack<ScreenNav>,
+    viewModel: NewsViewModel = viewModel()
+) {
+    val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
-    val newslist = NewsRepository.getNews()
-    var isSearchActive by remember { mutableStateOf(false) }
-    var searchText by remember { mutableStateOf("") }
-    val filteredNews = newslist.filter { news ->
-        val query = searchText.lowercase()
-        news.title.lowercase().contains(query) ||
-                news.description.lowercase().contains(query) ||
-                news.author.name.lowercase().contains(query) ||
-                news.author.fullName.lowercase().contains(query)
-    }
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             NewsTopBar(
-                isSearchActive = isSearchActive,
-                searchText = searchText,
-                onSearchToggle = {
-                    isSearchActive = !isSearchActive
-                    if (!isSearchActive) searchText = ""
-                },
-                onSearchTextChange = { searchText = it }
+                isSearchActive = uiState.isSearchActive,
+                searchText = uiState.searchText,
+                onSearchToggle = { viewModel.toggleSearch() },
+                onSearchTextChange = { viewModel.onSearchTextChange(it) }
             )
         }
     ) { paddingValues ->
-        if (filteredNews.isEmpty()) {
+        if (uiState.newsList.isEmpty()) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -66,9 +56,8 @@ fun NewsApp(backStack: NavBackStack<ScreenNav>) {
             }
         } else {
             NewsListScreen(
-                newList = filteredNews,
+                newList = uiState.newsList,
                 onNewsClick = { news ->
-
                     backStack.add(ScreenNav.NewsDetail(newsId = news.id))
                 },
                 modifier = Modifier.padding(paddingValues)
