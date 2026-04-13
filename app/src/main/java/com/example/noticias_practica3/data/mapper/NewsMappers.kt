@@ -14,7 +14,7 @@ fun NewsDto.toAuthorBo(): AuthorBo {
         id = "auth-${this.id ?: DEFAULT_STRING_VALUE}",
         name = this.authorFirstName ?: DEFAULT_STRING_VALUE,
         surname = this.authorLastName ?: DEFAULT_STRING_VALUE,
-        avatarRes = this.authorImage ?: DEFAULT_INT_VALUE
+        avatarRes = (this.authorImage ?: DEFAULT_INT_VALUE).toString()
     )
 }
 
@@ -33,7 +33,7 @@ fun NewsDto.toBo(): NewsBo {
         description = this.subtitle ?: DEFAULT_STRING_VALUE,
         content = this.body ?: DEFAULT_STRING_VALUE,
         date = this.date ?: DEFAULT_STRING_VALUE,
-        imageRes = this.imageRes ?: DEFAULT_INT_VALUE,
+        imageRes = (this.imageRes ?: DEFAULT_INT_VALUE).toString(),
 
         author = this.toAuthorBo(),
         blog = this.toBlogBo(),
