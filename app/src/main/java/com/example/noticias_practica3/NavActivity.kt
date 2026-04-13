@@ -19,6 +19,7 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import com.example.noticias_practica3.ui.NewsApp
 import com.example.noticias_practica3.ui.component.NewsBottomBar
 import com.example.noticias_practica3.ui.navigation.ScreenNav
+import com.example.noticias_practica3.ui.screen.InterestNewsScreen
 import com.example.noticias_practica3.ui.screen.NewsDetailScreen
 import com.example.noticias_practica3.ui.theme.Noticiaspractica3Theme
 
@@ -72,7 +73,7 @@ class NavActivity : ComponentActivity() {
                             }
 
                             is ScreenNav.Interests -> {
-                                //TODO
+                                InterestNewsScreen()
                             }
                         }
                     }

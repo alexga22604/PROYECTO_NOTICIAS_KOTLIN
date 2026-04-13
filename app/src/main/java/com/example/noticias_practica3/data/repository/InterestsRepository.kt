@@ -2,12 +2,13 @@ package com.example.noticias_practica3.data.repository
 
 import androidx.datastore.preferences.preferencesDataStore
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-private val Context.dataStore by preferencesDataStore(name = "user_interests")
-
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user_interests")
 class InterestsRepository(private val context: Context) {
     private val SELECTED_INTERESTS = stringSetPreferencesKey("selected_interests")
 

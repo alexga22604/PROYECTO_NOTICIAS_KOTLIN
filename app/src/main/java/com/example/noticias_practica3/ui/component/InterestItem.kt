@@ -62,7 +62,7 @@ fun InterestItem(
             Icon(
                 imageVector = if (interest.isSelected) Icons.Default.Remove else Icons.Default.Add,
                 contentDescription = null,
-                tint = colorResource(R.color.red_chill),
+                tint = Color.Red,
                 modifier = Modifier.size(20.dp)
             )
         }
