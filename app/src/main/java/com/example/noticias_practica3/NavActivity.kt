@@ -12,6 +12,8 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation3.runtime.NavBackStack
@@ -24,10 +26,13 @@ import com.example.noticias_practica3.ui.screen.NewsDetailScreen
 import com.example.noticias_practica3.ui.theme.Noticiaspractica3Theme
 
 class NavActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val windowSize = calculateWindowSizeClass(this)
+
             Noticiaspractica3Theme {
                 val backStack = rememberNavBackStack(ScreenNav.Home) as NavBackStack<ScreenNav>
                 val currentScreen = backStack.last()
@@ -47,8 +52,7 @@ class NavActivity : ComponentActivity() {
                             }
                         )
                     }
-                )
-                { paddingValues ->
+                ) { paddingValues ->
                     AnimatedContent(
                         targetState = currentScreen,
                         modifier = Modifier.padding(paddingValues),
@@ -60,14 +64,17 @@ class NavActivity : ComponentActivity() {
                     ) { targetScreen ->
                         when (targetScreen) {
                             is ScreenNav.Home -> {
-                                NewsApp(backStack = backStack)
+                                NewsApp(
+                                    backStack = backStack,
+                                    windowSizeWidth = windowSize.widthSizeClass
+                                )
                             }
 
                             is ScreenNav.NewsDetail -> {
                                 NewsDetailScreen(
                                     newsId = targetScreen.newsId,
                                     onBack = {
-                                        backStack.remove(currentScreen)
+                                        backStack.remove(targetScreen)
                                     }
                                 )
                             }
@@ -80,4 +87,5 @@ class NavActivity : ComponentActivity() {
                 }
             }
         }
-    }}
+    }
+}

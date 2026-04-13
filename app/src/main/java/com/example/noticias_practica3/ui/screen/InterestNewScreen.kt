@@ -1,8 +1,6 @@
 package com.example.noticias_practica3.ui.screen
 
 import android.content.Context
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,7 +10,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Terminal
 import androidx.compose.material3.Icon
@@ -43,9 +40,12 @@ fun InterestNewsScreen(context: Context = LocalContext.current) {
     val selectedInterests by repository.selectedInterestsFlow.collectAsState(initial = emptySet())
     val availableInterests = InterestsRepository.InterestsDataSource.availableInterests
 
-    Column(modifier = Modifier.fillMaxSize().statusBarsPadding()) {
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .statusBarsPadding()) {
         Box(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(top = 16.dp, start = 16.dp, end = 16.dp)
                 .size(40.dp),
             contentAlignment = Alignment.CenterStart
@@ -72,7 +72,10 @@ fun InterestNewsScreen(context: Context = LocalContext.current) {
             )
         }
         LazyColumn(
-            modifier = Modifier.weight(1f).fillMaxWidth().padding(top = 8.dp)
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+                .padding(top = 8.dp)
         ) {
             items(availableInterests) { name ->
                 val isSelected = selectedInterests.contains(name)

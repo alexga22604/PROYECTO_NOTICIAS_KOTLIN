@@ -29,21 +29,17 @@ fun NewsHomeScreen(context: Context = LocalContext.current,
     val uiState by viewModel.uiState.collectAsState()
     val repository = remember { InterestsRepository(context) }
     val selectedInterests by repository.selectedInterestsFlow.collectAsState(initial = emptySet())
-
-
     val allNews = remember { NewsRepository.getNews() }
     val filteredNews = remember(searchText, selectedInterests) {
         allNews.filter { news ->
             val matchesSearch = news.title.contains(searchText, ignoreCase = true) ||
                     news.author.name.contains(searchText, ignoreCase = true)
-
             val matchesInterest = if (selectedInterests.isEmpty()) {
                 true
             } else {
                 selectedInterests.any { interestName ->
                     news.title.contains(interestName, ignoreCase = true)
                 }
-
             }
             matchesSearch && matchesInterest
         }

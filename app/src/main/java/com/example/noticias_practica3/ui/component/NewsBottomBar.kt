@@ -3,7 +3,6 @@ package com.example.noticias_practica3.ui.component
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ListAlt
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.ListAlt
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -24,8 +23,11 @@ fun NewsBottomBar(
     ) {
         NavigationBarItem(
             selected = currentScreen is ScreenNav.Home || currentScreen is ScreenNav.NewsDetail,
-            onClick = { if (currentScreen !is ScreenNav.Home) {
-                onNavigate(ScreenNav.Home)} },
+            onClick = {
+                if (currentScreen !is ScreenNav.Home) {
+                    onNavigate(ScreenNav.Home)
+                }
+            },
             icon = { Icon(Icons.Default.Home, contentDescription = null) },
             colors = NavigationBarItemDefaults.colors(
                 selectedIconColor = Color.Red,
@@ -33,7 +35,7 @@ fun NewsBottomBar(
                 unselectedIconColor = Color.Gray,
                 selectedTextColor = Color.Red,
                 unselectedTextColor = Color.Gray,
-                )
+            )
         )
         NavigationBarItem(
             selected = currentScreen is ScreenNav.Interests,
@@ -45,7 +47,6 @@ fun NewsBottomBar(
                 unselectedIconColor = Color.Gray,
                 selectedTextColor = Color.Red,
                 unselectedTextColor = Color.Gray,
-
                 )
         )
     }
