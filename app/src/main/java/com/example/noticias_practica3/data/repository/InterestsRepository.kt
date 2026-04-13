@@ -28,4 +28,13 @@ class InterestsRepository(private val context: Context) {
             preferences[SELECTED_INTERESTS] = newSet
         }
     }
+    object InterestsDataSource {
+        val availableInterests = listOf(
+            "Compose",
+            "Kotlin",
+            "Jetpack",
+            "Material",
+            "Android"
+        )
+    }
 }

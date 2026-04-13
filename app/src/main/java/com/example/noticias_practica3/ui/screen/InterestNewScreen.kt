@@ -41,8 +41,7 @@ fun InterestNewsScreen(context: Context = LocalContext.current) {
     val repository = remember { InterestsRepository(context) }
     val scope = rememberCoroutineScope()
     val selectedInterests by repository.selectedInterestsFlow.collectAsState(initial = emptySet())
-    val availableInterests =
-        listOf("Jetpack Compose", "Kotlin", "Jetpack", "Declarative UIs", "Java")
+    val availableInterests = InterestsRepository.InterestsDataSource.availableInterests
 
     Column(modifier = Modifier.fillMaxSize().statusBarsPadding()) {
         Box(
