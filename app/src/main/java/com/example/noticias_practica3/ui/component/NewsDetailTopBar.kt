@@ -75,7 +75,7 @@ fun NewsDetailTopBar(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = stringResource(R.string.back_button_content_description),
                     tint = Color.Red,
-                    )
+                )
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(

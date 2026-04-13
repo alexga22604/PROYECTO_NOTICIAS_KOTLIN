@@ -59,7 +59,12 @@ class NewsViewModel(
                 true
             } else {
                 news.interests.any { it.name in selectedInterests } ||
-                        selectedInterests.any { interest -> news.title.contains(interest, ignoreCase = true) }
+                        selectedInterests.any { interest ->
+                            news.title.contains(
+                                interest,
+                                ignoreCase = true
+                            )
+                        }
             }
 
             matchesQuery && matchesInterests

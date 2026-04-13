@@ -41,6 +41,7 @@ android {
 }
 
 dependencies {
+    implementation ("androidx.compose.material3:material3-window-size-class")
     implementation("androidx.datastore:datastore-preferences:1.1.1")
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.navigation3.ui)
@@ -59,6 +60,7 @@ dependencies {
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.datastore.core)
     implementation(libs.androidx.datastore.preferences.core)
+    implementation(libs.androidx.compose.material3.window.size.class1)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

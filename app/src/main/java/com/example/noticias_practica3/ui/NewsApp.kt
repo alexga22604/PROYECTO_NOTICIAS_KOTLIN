@@ -3,17 +3,19 @@ package com.example.noticias_practica3.ui
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.NavBackStack
 import com.example.noticias_practica3.R
@@ -25,10 +27,10 @@ import com.example.noticias_practica3.ui.theme.screen.NewsListScreen
 @Composable
 fun NewsApp(
     backStack: NavBackStack<ScreenNav>,
+    windowSizeWidth: WindowWidthSizeClass,
     viewModel: NewsViewModel = viewModel(factory = NewsViewModel.Factory)
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    val context = LocalContext.current
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -41,27 +43,32 @@ fun NewsApp(
             )
         }
     ) { paddingValues ->
-        if (uiState.newsList.isEmpty()) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = stringResource(id = R.string.search_no_results),
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = Color.Gray
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues),
+            contentAlignment = Alignment.TopCenter
+        ) {
+            if (uiState.newsList.isEmpty()) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.search_no_results),
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = Color.Gray
+                    )
+                }
+            } else {
+                NewsListScreen(
+                    newList = uiState.newsList,
+                    onNewsClick = { news ->
+                        backStack.add(ScreenNav.NewsDetail(newsId = news.id))
+                    },
+                    modifier = Modifier.widthIn(max = if (windowSizeWidth == WindowWidthSizeClass.Expanded) 800.dp else 2000.dp)
                 )
             }
-        } else {
-            NewsListScreen(
-                newList = uiState.newsList,
-                onNewsClick = { news ->
-                    backStack.add(ScreenNav.NewsDetail(newsId = news.id))
-                },
-                modifier = Modifier.padding(paddingValues)
-            )
         }
     }
 }

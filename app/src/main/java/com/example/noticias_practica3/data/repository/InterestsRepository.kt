@@ -1,17 +1,18 @@
 package com.example.noticias_practica3.data.repository
 
-import androidx.datastore.preferences.preferencesDataStore
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringSetPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user_interests")
+
 class InterestsRepository(private val context: Context) {
     private val SELECTED_INTERESTS = stringSetPreferencesKey("selected_interests")
-
     val selectedInterestsFlow: Flow<Set<String>> = context.dataStore.data
         .map { preferences ->
             preferences[SELECTED_INTERESTS] ?: emptySet()
@@ -28,6 +29,7 @@ class InterestsRepository(private val context: Context) {
             preferences[SELECTED_INTERESTS] = newSet
         }
     }
+
     object InterestsDataSource {
         val availableInterests = listOf(
             "Compose",
