@@ -50,7 +50,7 @@ fun NewsTopBar(
             {
                 Icon(
                     imageVector = Icons.Default.Terminal,
-                    tint = Color.Red,
+                    tint = MaterialTheme.colorScheme.error,
                     contentDescription = stringResource(id = R.string.cd_terminal_logo),
                     modifier = Modifier.size(20.dp),
                 )

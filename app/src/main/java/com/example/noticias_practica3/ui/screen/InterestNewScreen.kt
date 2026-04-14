@@ -22,7 +22,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -40,9 +39,11 @@ fun InterestNewsScreen(context: Context = LocalContext.current) {
     val selectedInterests by repository.selectedInterestsFlow.collectAsState(initial = emptySet())
     val availableInterests = InterestsRepository.InterestsDataSource.availableInterests
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .statusBarsPadding()) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .statusBarsPadding()
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -58,7 +59,7 @@ fun InterestNewsScreen(context: Context = LocalContext.current) {
             ) {
                 Icon(
                     imageVector = Icons.Default.Terminal,
-                    tint = Color.Red,
+                    tint = MaterialTheme.colorScheme.error,
                     contentDescription = null,
                     modifier = Modifier.size(20.dp)
                 )
@@ -66,7 +67,7 @@ fun InterestNewsScreen(context: Context = LocalContext.current) {
             Text(
                 text = stringResource(R.string.nav_interests),
                 style = MaterialTheme.typography.headlineMedium,
-                color = Color.Gray,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center
             )
