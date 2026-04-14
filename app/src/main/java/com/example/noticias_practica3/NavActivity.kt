@@ -74,7 +74,9 @@ class NavActivity : ComponentActivity() {
                                 NewsDetailScreen(
                                     newsId = targetScreen.newsId,
                                     onBack = {
-                                        backStack.remove(targetScreen)
+                                        if (backStack.size > 1) {
+                                            backStack.remove(targetScreen)
+                                        }
                                     }
                                 )
                             }

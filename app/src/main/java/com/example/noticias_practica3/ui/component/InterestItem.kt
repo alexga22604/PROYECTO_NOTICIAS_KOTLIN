@@ -49,7 +49,7 @@ fun InterestItem(
             Icon(
                 imageVector = Icons.Default.Category,
                 contentDescription = null,
-                tint = Color.Gray
+                tint = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
 
@@ -74,7 +74,7 @@ fun InterestItem(
             Icon(
                 imageVector = if (interest.isSelected) Icons.Default.Remove else Icons.Default.Add,
                 contentDescription = null,
-                tint = Color.Red,
+                tint = MaterialTheme.colorScheme.error,
                 modifier = Modifier.size(20.dp)
             )
         }

@@ -13,8 +13,8 @@ import androidx.compose.ui.platform.LocalContext
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
     secondary = PurpleGrey80,
-    tertiary = Pink80
-)
+    tertiary = Pink80,
+    )
 private val LightColorScheme = lightColorScheme(
     primary = Purple40,
     secondary = PurpleGrey40,
@@ -22,9 +22,9 @@ private val LightColorScheme = lightColorScheme(
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
     surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
+    onPrimary = MaterialTheme.colorScheme.surface,
+    onSecondary = MaterialTheme.colorScheme.surface,
+    onTertiary = MaterialTheme.colorScheme.surface,
     onBackground = Color(0xFF1C1B1F),
     onSurface = Color(0xFF1C1B1F),
     */
@@ -33,7 +33,6 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun Noticiaspractica3Theme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
