@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Noticias-practica3</string>
+    <string name="title_activity_nav">NavActivity</string>
+    <string name="top_tittle_main">Top stories for you</string>
+    <string name="jetnews">jetnews</string>
+    <string name="search_placeholder">Search news...</string>
+    <string name="search_no_results">No hay coincidencias</string>
+    <string name="search_description">Search</string>
+    <string name="content_description_logo">JetNews Logo</string>
+    <string name="log_news_click">Ha pulsado en: %s</string>
+    <string name="cd_close_search">Close search</string>
+    <string name="cd_open_search">Search Open</string>
+    <string name="cd_terminal_logo">Terminal icon logo</string>
+
 </resources>
