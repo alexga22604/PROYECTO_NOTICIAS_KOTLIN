@@ -1,5 +1,6 @@
 package com.example.noticias_practica3.ui.screen
 
+import android.content.Context
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
