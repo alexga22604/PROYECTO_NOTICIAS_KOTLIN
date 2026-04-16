@@ -23,7 +23,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.noticias_practica3.R
+import com.example.noticias_practica3.data.model.NewsBo
 import com.example.noticias_practica3.data.repository.NewsRepository
 import com.example.noticias_practica3.ui.component.NewsDetailTopBar
 
@@ -43,9 +48,11 @@ fun NewsDetailScreen(
     newsId: String,
     onBack: () -> Unit
 ) {
-    val news = remember(newsId) {
-        NewsRepository.getNews().find { it.id == newsId }
+    var news by remember { mutableStateOf<NewsBo?>(null) }
+    LaunchedEffect(newsId) {
+        news = NewsRepository.getNews().find { it.id == newsId }
     }
+
     Scaffold(
         topBar = {
             NewsDetailTopBar(onBack = onBack, authorName = news?.author?.name ?: "")

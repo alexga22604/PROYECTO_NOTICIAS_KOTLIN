@@ -13,7 +13,6 @@ import com.example.noticias_practica3.ui.screen.NewsHomeScreen
 @Composable
 fun AppNavigation(
     paddingValues: PaddingValues,
-    searchText: String
 ) {
     val backStack = rememberNavBackStack(ScreenNav.Home)
 
@@ -24,7 +23,6 @@ fun AppNavigation(
         entryProvider = entryProvider {
             entry<ScreenNav.Home> {
                 NewsHomeScreen(
-                    searchText = searchText,
                     onNewsClick = { id ->
                         backStack.add(ScreenNav.NewsDetail(id))
                     }
