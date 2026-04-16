@@ -8,8 +8,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 object NewsRepository {
-    suspend fun getNewsFromDataSource(): List<NewsDto> = withContext(Dispatchers.IO){
-         listOf(
+    suspend fun getNewsFromDataSource(): List<NewsDto> {
+        return listOf(
             NewsDto(
                 "1",
                 "Novedades de Android 16",
