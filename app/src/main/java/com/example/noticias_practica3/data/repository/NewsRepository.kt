@@ -4,10 +4,12 @@ import com.example.noticias_practica3.R
 import com.example.noticias_practica3.data.NewsDto
 import com.example.noticias_practica3.data.mapper.toBo
 import com.example.noticias_practica3.data.model.NewsBo
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 object NewsRepository {
-    private fun getNewsFromDataSource(): List<NewsDto> {
-        return listOf(
+    suspend fun getNewsFromDataSource(): List<NewsDto> = withContext(Dispatchers.IO){
+         listOf(
             NewsDto(
                 "1",
                 "Novedades de Android 16",
@@ -55,7 +57,7 @@ object NewsRepository {
         )
     }
 
-    fun getNews(): List<NewsBo> {
-        return getNewsFromDataSource().map { it.toBo() }
+    suspend fun getNews(): List<NewsBo> = withContext(Dispatchers.IO) {
+         getNewsFromDataSource().map { it.toBo() }
     }
 }

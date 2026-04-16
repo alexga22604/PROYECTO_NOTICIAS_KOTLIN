@@ -17,7 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.noticias_practica3.R
 import com.example.noticias_practica3.ui.component.NewsTopBar
-import com.example.noticias_practica3.ui.model.NewsViewModel
+import com.example.noticias_practica3.ui.viewmodel.NewsViewModel
 import com.example.noticias_practica3.ui.theme.screen.NewsListScreen
 
 @Composable

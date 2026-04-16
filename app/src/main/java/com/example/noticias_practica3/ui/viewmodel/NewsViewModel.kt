@@ -1,20 +1,31 @@
-package com.example.noticias_practica3.ui.model
+package com.example.noticias_practica3.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.noticias_practica3.data.model.NewsBo
 import com.example.noticias_practica3.data.repository.NewsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class NewsViewModel : ViewModel() {
     private val newsRepository = NewsRepository
+    private var allNews: List<NewsBo> = emptyList()
     private val _uiState = MutableStateFlow(NewUiState())
     val uiState: StateFlow<NewUiState> = _uiState.asStateFlow()
 
     init {
-        val allNews = newsRepository.getNews()
-        _uiState.update { it.copy(newsList = allNews) }
+        fetchNews()
+    }
+
+    private fun fetchNews() {
+        viewModelScope.launch {
+            val news = NewsRepository.getNews()
+            allNews = news
+            _uiState.update { it.copy(newsList = news) }
+        }
     }
 
     fun onSearchTextChange(newText: String) {
@@ -34,7 +45,6 @@ class NewsViewModel : ViewModel() {
     }
 
     private fun applyFilter() {
-        val allNews = newsRepository.getNews()
         val query = _uiState.value.searchText.lowercase()
 
         if (query.isEmpty()) {
