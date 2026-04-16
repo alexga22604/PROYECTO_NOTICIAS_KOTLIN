@@ -18,8 +18,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.NavBackStack
 import com.example.noticias_practica3.R
 import com.example.noticias_practica3.ui.component.NewsTopBar
-import com.example.noticias_practica3.ui.model.NewsViewModel
-import com.example.noticias_practica3.ui.navigation.ScreenNav
+import com.example.noticias_practica3.ui.viewmodel.NewsViewModel
 import com.example.noticias_practica3.ui.theme.screen.NewsListScreen
 
 @Composable

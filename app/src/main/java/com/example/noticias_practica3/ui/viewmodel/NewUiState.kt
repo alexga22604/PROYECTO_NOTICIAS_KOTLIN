@@ -1,4 +1,4 @@
-package com.example.noticias_practica3.ui.model
+package com.example.noticias_practica3.ui.viewmodel
 
 import com.example.noticias_practica3.data.model.NewsBo
 
