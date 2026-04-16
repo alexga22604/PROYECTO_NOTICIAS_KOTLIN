@@ -1,11 +1,10 @@
 package com.example.noticias_practica3.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.noticias_practica3.data.model.NewsBo
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
+import com.example.noticias_practica3.data.model.NewsBo
 import com.example.noticias_practica3.data.repository.InterestsRepository
 import com.example.noticias_practica3.data.repository.NewsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,18 +13,17 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class NewsViewModel : ViewModel() {
-    private val newsRepository = NewsRepository
-    private var allNews: List<NewsBo> = emptyList()
 class NewsViewModel(
     private val newsRepository: NewsRepository,
     private val interestsRepository: InterestsRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(NewUiState())
     val uiState: StateFlow<NewUiState> = _uiState.asStateFlow()
+    private var allNews: List<NewsBo> = emptyList()
 
     init {
         fetchNews()
+        observeInterests()
     }
 
     private fun fetchNews() {
@@ -52,28 +50,36 @@ class NewsViewModel(
         applyFilter()
     }
 
+    private fun observeInterests() {
+        viewModelScope.launch {
+            interestsRepository.selectedInterestsFlow.collect { uptadeInterests ->
+                _uiState.update { it.copy(selectedInterests = uptadeInterests) }
+                applyFilter()
+            }
+        }
+    }
+
     private fun applyFilter() {
-        val query = _uiState.value.searchText.lowercase()
-        val selectedInterests = _uiState.value.selectedInterests
+        val state = _uiState.value
+        val query = state.searchText.lowercase()
+        val selectedInterests = state.selectedInterests
         val filtered = allNews.filter { news ->
             val matchesQuery = query.isEmpty() ||
                     news.title.lowercase().contains(query) ||
                     news.description.lowercase().contains(query) ||
-                    news.author.name.lowercase().contains(query)
+                    news.author.fullName.lowercase().contains(query)
             val matchesInterests = if (selectedInterests.isEmpty()) {
                 true
             } else {
-                news.interests.any { it.name in selectedInterests } ||
-                        selectedInterests.any { interest ->
-                            news.title.contains(
-                                interest,
-                                ignoreCase = true
-                            )
-                        }
+                selectedInterests.any { interest ->
+                    news.title.contains(interest, ignoreCase = true) ||
+                            news.description.contains(interest, ignoreCase = true)
+                }
             }
 
             matchesQuery && matchesInterests
         }
+
         _uiState.update { it.copy(newsList = filtered) }
     }
 
