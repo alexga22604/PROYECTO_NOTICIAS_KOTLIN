@@ -24,6 +24,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -41,15 +42,19 @@ import com.example.noticias_practica3.R
 import com.example.noticias_practica3.data.model.NewsBo
 import com.example.noticias_practica3.data.repository.NewsRepository
 import com.example.noticias_practica3.ui.component.NewsDetailTopBar
+import com.example.noticias_practica3.ui.viewmodel.NewsViewModel
 
 @Composable
 fun NewsDetailScreen(
     newsId: String,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    viewModel: NewsViewModel
 ) {
-    var news by remember { mutableStateOf<NewsBo?>(null) }
+    val uiState by viewModel.uiState.collectAsState()
+    val news = uiState.selectedNews
+
     LaunchedEffect(newsId) {
-        news = NewsRepository.getNews().find { it.id == newsId }
+        viewModel.selectNewsById(newsId)
     }
 
     Scaffold(
