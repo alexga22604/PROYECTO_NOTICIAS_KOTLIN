@@ -8,5 +8,6 @@ data class NewUiState(
     val newsList: List<NewsBo> = emptyList(),
     val searchText: String = DEFAULT_STRING_VALUE,
     val isSearchActive: Boolean = false,
-    val selectedInterests: Set<String> = emptySet()
+    val selectedInterests: Set<String> = emptySet(),
+    val selectedNews: NewsBo? = null
 )

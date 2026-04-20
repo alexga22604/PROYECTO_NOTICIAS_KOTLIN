@@ -43,6 +43,11 @@ class NewsViewModel : ViewModel() {
         }
         applyFilter()
     }
+    fun selectNewsById(id: String) {
+        val news = allNews.find { it.id == id }
+        _uiState.update { it.copy(selectedNews = news) }
+    }
+
 
     private fun applyFilter() {
         val query = _uiState.value.searchText.lowercase()
