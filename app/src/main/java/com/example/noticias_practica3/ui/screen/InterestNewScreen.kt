@@ -1,6 +1,5 @@
 package com.example.noticias_practica3.ui.screen
 
-import android.content.Context
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,27 +17,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.noticias_practica3.R
 import com.example.noticias_practica3.data.model.InterestData
-import com.example.noticias_practica3.data.repository.InterestsRepository
+import com.example.noticias_practica3.data.repository.InterestsRepository.InterestsDataSource.availableInterests
 import com.example.noticias_practica3.ui.component.InterestItem
-import kotlinx.coroutines.launch
+import com.example.noticias_practica3.ui.viewmodel.InterestsViewModel
 
 @Composable
-fun InterestNewsScreen(context: Context = LocalContext.current) {
-    val repository = remember { InterestsRepository(context) }
-    val scope = rememberCoroutineScope()
-    val selectedInterests by repository.selectedInterestsFlow.collectAsState(initial = emptySet())
-    val availableInterests = InterestsRepository.InterestsDataSource.availableInterests
-
+fun InterestNewsScreen(viewModel: InterestsViewModel = viewModel()) {
+    val selectedInterests by viewModel.selectedInterests.collectAsState()
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -82,12 +75,11 @@ fun InterestNewsScreen(context: Context = LocalContext.current) {
                 val isSelected = selectedInterests.contains(name)
                 InterestItem(
                     interest = InterestData(name, isSelected),
-                    onToggle = { newValue ->
-                        scope.launch {
-                            repository.toggleInterest(name, newValue)
-                        }
+                    onToggle = {
+                        viewModel.toggleInterest(name)
                     })
             }
         }
     }
 }
+
