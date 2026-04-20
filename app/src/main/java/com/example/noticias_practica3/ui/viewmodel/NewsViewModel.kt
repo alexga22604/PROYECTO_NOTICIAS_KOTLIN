@@ -49,11 +49,6 @@ class NewsViewModel(
         }
         applyFilter()
     }
-    fun selectNewsById(id: String) {
-        val news = allNews.find { it.id == id }
-        _uiState.update { it.copy(selectedNews = news) }
-    }
-
 
     private fun observeInterests() {
         viewModelScope.launch {
