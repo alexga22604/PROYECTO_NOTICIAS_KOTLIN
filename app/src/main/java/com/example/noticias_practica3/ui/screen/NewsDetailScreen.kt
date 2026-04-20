@@ -26,9 +26,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,11 +36,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.noticias_practica3.R
-import com.example.noticias_practica3.data.model.NewsBo
-import com.example.noticias_practica3.data.repository.NewsRepository
 import com.example.noticias_practica3.ui.component.NewsDetailTopBar
 import com.example.noticias_practica3.ui.viewmodel.NewsDetailViewModel
-import com.example.noticias_practica3.ui.viewmodel.NewsViewModel
 
 @Composable
 fun NewsDetailScreen(

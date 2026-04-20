@@ -1,6 +1,5 @@
 package com.example.noticias_practica3.ui.viewmodel
 
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.noticias_practica3.data.model.NewsBo
@@ -13,7 +12,6 @@ import kotlinx.coroutines.launch
 class NewsDetailViewModel : ViewModel() {
     private val _news = MutableStateFlow<NewsBo?>(null)
     val news: StateFlow<NewsBo?> = _news.asStateFlow()
-
     fun getNewsById(id: String) {
         viewModelScope.launch {
             val allNews = NewsRepository.getNews()
