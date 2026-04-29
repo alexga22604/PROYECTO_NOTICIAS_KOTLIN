@@ -16,8 +16,10 @@ import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSiz
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.rememberNavBackStack
+import androidx.wear.compose.material.Scaffold
 import com.example.noticias_practica3.ui.NewsApp
 import com.example.noticias_practica3.ui.component.NewsBottomBar
 import com.example.noticias_practica3.ui.navigation.ScreenNav
@@ -77,7 +79,8 @@ class NavActivity : ComponentActivity() {
                                         if (backStack.size > 1) {
                                             backStack.remove(targetScreen)
                                         }
-                                    }
+                                    },
+                                    viewModel = viewModel()
                                 )
                             }
 
