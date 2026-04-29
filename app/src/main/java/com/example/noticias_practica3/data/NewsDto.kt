@@ -8,6 +8,6 @@ data class NewsDto(
     val date: String?,
     val authorFirstName: String?,
     val authorLastName: String?,
-    val authorImage: Int?,
-    val imageRes: Int?
+    val authorImage: String?,
+    val imageRes: String?
 )

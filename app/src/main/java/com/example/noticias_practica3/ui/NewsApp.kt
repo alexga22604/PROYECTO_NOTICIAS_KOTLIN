@@ -15,13 +15,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation3.runtime.NavBackStack
 import com.example.noticias_practica3.R
 import com.example.noticias_practica3.ui.component.NewsTopBar
-import com.example.noticias_practica3.ui.viewmodel.NewsViewModel
+import com.example.noticias_practica3.ui.navigation.ScreenNav
 import com.example.noticias_practica3.ui.theme.screen.NewsListScreen
+import com.example.noticias_practica3.ui.viewmodel.NewsViewModel
 
 @Composable
 fun NewsApp(
+    backStack: NavBackStack<ScreenNav>,
     viewModel: NewsViewModel = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -55,8 +58,7 @@ fun NewsApp(
             NewsListScreen(
                 newList = uiState.newsList,
                 onNewsClick = { news ->
-                    val mensaje = context.getString(R.string.log_news_click, news.title)
-                    println(mensaje)
+                    backStack.add(ScreenNav.NewsDetail(newsId = news.id))
                 },
                 modifier = Modifier.padding(paddingValues)
             )
