@@ -1,0 +1,1 @@
+Aplicación web desarrollada para la gestión y consulta de noticias en tiempo real. Cuenta con un diseño responsivo, filtrado avanzado por categorías y una interfaz intuitiva orientada a ofrecer una óptima experiencia de usuario en la navegación y lectura de artículos.
